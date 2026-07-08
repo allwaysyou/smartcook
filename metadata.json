@@ -1,0 +1,6 @@
+{
+  "name": "SmartCook",
+  "description": "Live Interactive Kitchen Recipe Platform with bulletproof background Web Worker timers, dynamic servings scaler, and multi-sensory alerts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
