@@ -4,12 +4,13 @@ import { getFirestore } from 'firebase/firestore';
 
 // Configuration injected from firebase-applet-config.json
 const firebaseConfig = {
-  apiKey: "AIzaSyBTGUETtADB4XEdRMwiDB5oBbXqa6sfuzs",
-  authDomain: "gen-lang-client-0128861273.firebaseapp.com",
-  projectId: "gen-lang-client-0128861273",
-  storageBucket: "gen-lang-client-0128861273.firebasestorage.app",
-  messagingSenderId: "559937159890",
-  appId: "1:559937159890:web:e82333e26d91d5088ba30b"
+  apiKey: "AIzaSyCaxAsP5oMzszUyGqibvytbeunoUmojq-Q",
+  authDomain: "smartcook-6b0f9.firebaseapp.com",
+  projectId: "smartcook-6b0f9",
+  storageBucket: "smartcook-6b0f9.firebasestorage.app",
+  messagingSenderId: "721466508399",
+  appId: "1:721466508399:web:1a8bfb75dfd908860df99a",
+  measurementId: "G-5PZTG2RN1L"
 };
 
 // Initialize Firebase
