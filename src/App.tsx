@@ -28,12 +28,20 @@ import {
   ChevronDown,
   Mic,
   MicOff,
-  Database
+  Database,
+  Lock,
+  LogOut,
+  User as UserIcon
 } from 'lucide-react';
 import { Recipe, Category, TimerState } from './types';
 import { INITIAL_RECIPES } from './data/initialRecipes';
 import { playAlarm, stopAlarm, unlockAudio, startSilentLoop, stopSilentLoop, playEscalatedAlarm, stopEscalatedAlarm, playFiveSecondWarningChime } from './utils/audio';
 import AdminPanel from './components/AdminPanel';
+import AuthModal from './components/AuthModal';
+import UpgradeModal from './components/UpgradeModal';
+import ProfileDashboard from './components/ProfileDashboard';
+import BottomNavigation from './components/BottomNavigation';
+import { auth, signOut, onAuthStateChanged } from './lib/firebase';
 
 const SPONSORS_DATA = [
   {
@@ -64,10 +72,126 @@ const SPONSORS_DATA = [
 
 export default function App() {
   // Navigation & View States
-  const [viewMode, setViewMode] = useState<'home' | 'detail' | 'cooking' | 'admin'>('home');
+  const [viewMode, setViewMode] = useState<'home' | 'detail' | 'cooking' | 'admin' | 'profile'>('home');
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [recipes, setRecipes] = useState<Recipe[]>(INITIAL_RECIPES);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  
+  // User Authentication & Pro Subscription State
+  const [currentUser, setCurrentUser] = useState<any | null>(null);
+  const [authToken, setAuthToken] = useState<string | null>(localStorage.getItem('smartcook_token'));
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
+  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState<boolean>(false);
+
+  // Synchronize authenticated user profile on load
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!authToken) return;
+      try {
+        const response = await fetch('/api/auth/me', {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success) {
+            setCurrentUser(data.user);
+          } else {
+            handleLogout();
+          }
+        } else {
+          handleLogout();
+        }
+      } catch (err) {
+        console.warn('Profile sync failed:', err);
+      }
+    };
+    fetchProfile();
+  }, [authToken]);
+
+  // Listen to Firebase Auth state shifts to stay logged in and synchronize session
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
+      if (fbUser) {
+        // If we have a Firebase user but no local auth token, perform background federated sync
+        if (!localStorage.getItem('smartcook_token')) {
+          try {
+            const profile = {
+              uid: fbUser.uid,
+              name: fbUser.displayName || 'Google User',
+              email: fbUser.email,
+              photoURL: fbUser.photoURL || ''
+            };
+            const response = await fetch('/api/auth/google', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(profile),
+            });
+            const data = await response.json();
+            if (response.ok && data.success) {
+              handleAuthSuccess(data.token, data.user);
+            }
+          } catch (err) {
+            console.warn('Firebase background sync failed:', err);
+          }
+        }
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('smartcook_token');
+    setAuthToken(null);
+    setCurrentUser(null);
+    setViewMode('home');
+    signOut(auth).catch(err => console.warn('Firebase signout failed:', err));
+  };
+
+  const handleAuthSuccess = (token: string, user: any) => {
+    localStorage.setItem('smartcook_token', token);
+    setAuthToken(token);
+    setCurrentUser(user);
+  };
+
+  const handleBottomTabClick = (tab: 'home' | 'search' | 'premium' | 'profile') => {
+    if (tab === 'home') {
+      setViewMode('home');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (tab === 'search') {
+      setViewMode('home');
+      setTimeout(() => {
+        const searchInput = document.getElementById('mobile-search-input');
+        if (searchInput) {
+          (searchInput as HTMLInputElement).focus();
+          searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 150);
+    } else if (tab === 'premium') {
+      if (currentUser?.isPremium) {
+        setViewMode('profile');
+        setTimeout(() => {
+          const headings = Array.from(document.querySelectorAll('h3'));
+          const billingHeading = headings.find(h => h.textContent?.toLowerCase().includes('billing details'));
+          if (billingHeading) {
+            billingHeading.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+          }
+        }, 150);
+      } else {
+        setIsUpgradeModalOpen(true);
+      }
+    } else if (tab === 'profile') {
+      if (currentUser) {
+        setViewMode('profile');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setIsAuthModalOpen(true);
+      }
+    }
+  };
   
   // Active Cooking State
   const [activeRecipe, setActiveRecipe] = useState<Recipe | null>(null);
@@ -681,7 +805,20 @@ export default function App() {
   };
 
   // Navigation Logic
+  const checkRecipePremiumAccess = (recipe: Recipe): boolean => {
+    if (recipe.isPremium && !currentUser?.isPremium) {
+      if (!currentUser) {
+        setIsAuthModalOpen(true);
+      } else {
+        setIsUpgradeModalOpen(true);
+      }
+      return false;
+    }
+    return true;
+  };
+
   const handleSelectRecipe = (recipe: Recipe) => {
+    if (!checkRecipePremiumAccess(recipe)) return;
     setSelectedRecipe(recipe);
     setServings(recipe.servings_base);
     setCheckedIngredients({});
@@ -778,6 +915,7 @@ export default function App() {
   };
 
   const handleStartCooking = (recipe: Recipe) => {
+    if (!checkRecipePremiumAccess(recipe)) return;
     const warnings = checkLongTermPrep(recipe);
     if (warnings.length > 0) {
       setPendingCookingRecipe(recipe);
@@ -956,9 +1094,85 @@ export default function App() {
               <Database className="w-5 h-5" />
             </button>
 
-            <div className="w-10 h-10 rounded-full bg-orange-100 border-2 border-white shadow-sm flex items-center justify-center font-bold text-orange-600 text-sm">
-              SC
-            </div>
+            {currentUser ? (
+              <div className="flex items-center gap-3">
+                <div 
+                  className="text-right hidden md:block cursor-pointer hover:opacity-80 transition-opacity"
+                  onClick={() => setViewMode('profile')}
+                >
+                  <div className="text-xs font-black text-gray-900 leading-tight">
+                    {currentUser.name}
+                  </div>
+                  <div className="flex items-center justify-end gap-1 mt-0.5">
+                    {currentUser.isPremium ? (
+                      <span className="bg-amber-100 text-amber-800 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full border border-amber-200 uppercase tracking-widest flex items-center gap-0.5">
+                        <Sparkles className="w-2.5 h-2.5 fill-amber-500 text-amber-500 animate-pulse" />
+                        PRO
+                      </span>
+                    ) : (
+                      <span className="bg-gray-100 text-gray-600 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full border border-gray-200 uppercase tracking-widest">
+                        FREE
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div 
+                  onClick={() => setViewMode('profile')}
+                  className={`w-10 h-10 rounded-full border-2 shadow-sm flex items-center justify-center font-bold text-sm transition-all cursor-pointer hover:ring-2 hover:ring-orange-500/30 overflow-hidden ${
+                    currentUser.isPremium 
+                      ? 'bg-amber-50 border-amber-400 text-amber-600' 
+                      : 'bg-orange-50 border-orange-200 text-orange-600'
+                  }`}
+                  title={`${currentUser.name} (${currentUser.isPremium ? 'Pro Member' : 'Free Member'} - Click to view Profile)`}
+                >
+                  {currentUser.photoURL ? (
+                    <img 
+                      src={currentUser.photoURL} 
+                      referrerPolicy="no-referrer"
+                      alt={currentUser.name} 
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    currentUser.name ? currentUser.name.substring(0, 2).toUpperCase() : 'US'
+                  )}
+                </div>
+
+                {!currentUser.isPremium && (
+                  <button
+                    onClick={() => setIsUpgradeModalOpen(true)}
+                    className="hidden sm:flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-full text-xs font-bold shadow-md shadow-orange-500/10 cursor-pointer transition-all"
+                  >
+                    <Sparkles className="w-3 h-3 fill-white" />
+                    UPGRADE
+                  </button>
+                )}
+
+                <button
+                  onClick={handleLogout}
+                  className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-all cursor-pointer"
+                  title="Log Out"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setIsAuthModalOpen(true)}
+                  className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-full text-xs font-bold transition-all shadow-md shadow-orange-500/20 cursor-pointer"
+                >
+                  Login / Sign Up
+                </button>
+                <button
+                  onClick={() => setIsUpgradeModalOpen(true)}
+                  className="hidden sm:flex items-center gap-1 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-full text-xs font-extrabold shadow-md shadow-orange-500/15 cursor-pointer transition-all"
+                >
+                  <Sparkles className="w-3.5 h-3.5 fill-white" />
+                  GO PRO
+                </button>
+              </div>
+            )}
           </div>
         </nav>
       )}
@@ -971,6 +1185,7 @@ export default function App() {
               <Search className="w-4 h-4" />
             </div>
             <input 
+              id="mobile-search-input"
               type="text" 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -983,7 +1198,7 @@ export default function App() {
 
       {/* VIEW: HOME DASHBOARD */}
       {viewMode === 'home' && (
-        <main className="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full space-y-8 animate-fade-in">
+        <main className="flex-1 p-4 md:p-8 pb-24 md:pb-8 max-w-7xl mx-auto w-full space-y-8 animate-fade-in">
           
           {/* HERO BANNER SECTION (Recipe of the Day) */}
           {featuredRecipe && (
@@ -1294,8 +1509,25 @@ export default function App() {
                   <div 
                     key={recipe._id}
                     onClick={() => handleSelectRecipe(recipe)}
-                    className="bg-white border border-gray-200/60 rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl hover:border-orange-500/30 transition-all group cursor-pointer flex flex-col"
+                    className="bg-white border border-gray-200/60 rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl hover:border-orange-500/30 transition-all group cursor-pointer flex flex-col relative"
                   >
+                    {recipe.isPremium && !currentUser?.isPremium && (
+                      <div className="absolute inset-0 z-20 bg-white/75 backdrop-blur-[5px] flex flex-col items-center justify-center p-4 text-center select-none" onClick={(e) => { e.stopPropagation(); if (!currentUser) { setIsAuthModalOpen(true); } else { setIsUpgradeModalOpen(true); } }}>
+                        <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 mb-2 shadow-sm border border-amber-200">
+                          <Lock className="w-4 h-4 text-amber-700" />
+                        </div>
+                        <span className="text-[9px] font-black tracking-widest text-amber-800 uppercase mb-1">PRO MEMBERS ONLY</span>
+                        <p className="text-xs font-black text-gray-900 px-2 leading-snug mb-3">
+                          This recipe is for Pro members. Unlock for just ₹9.
+                        </p>
+                        <button 
+                          onClick={(e) => { e.stopPropagation(); if (!currentUser) { setIsAuthModalOpen(true); } else { setIsUpgradeModalOpen(true); } }}
+                          className="px-4 py-1.5 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:from-amber-600 hover:via-orange-600 text-white rounded-full text-[9px] font-black uppercase tracking-wider shadow-md shadow-orange-500/10 cursor-pointer"
+                        >
+                          Unlock Now
+                        </button>
+                      </div>
+                    )}
                     <div className="relative aspect-[16/10] overflow-hidden shrink-0">
                       <img 
                         src={recipe.cover_image} 
@@ -1303,6 +1535,14 @@ export default function App() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
+                      {recipe.isPremium && (
+                        <div className="absolute top-3 left-3 z-10">
+                          <span className="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider text-amber-800 bg-amber-100 border border-amber-300 shadow-sm flex items-center gap-1.5">
+                            <Lock className="w-3 h-3 text-amber-700 shrink-0" />
+                            <span>PRO PREMIUM</span>
+                          </span>
+                        </div>
+                      )}
                       <div className="absolute top-3 right-3">
                         <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-white shadow-sm ${
                           recipe.difficulty === 'Easy' ? 'bg-emerald-500' :
@@ -1385,7 +1625,7 @@ export default function App() {
 
       {/* VIEW: DETAIL PAGE */}
       {viewMode === 'detail' && selectedRecipe && (
-        <main className="flex-1 p-4 md:p-8 max-w-4xl mx-auto w-full space-y-8 animate-fade-in">
+        <main className="flex-1 p-4 md:p-8 pb-24 md:pb-8 max-w-4xl mx-auto w-full space-y-8 animate-fade-in">
           <button 
             onClick={() => setViewMode('home')}
             className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
@@ -1592,6 +1832,14 @@ export default function App() {
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
+                                if (!currentUser?.isPremium) {
+                                  if (!currentUser) {
+                                    setIsAuthModalOpen(true);
+                                  } else {
+                                    setIsUpgradeModalOpen(true);
+                                  }
+                                  return;
+                                }
                                 setOpenSubstituteMenu(openSubstituteMenu === subKey ? null : subKey);
                               }}
                               className="px-2 py-1 bg-orange-50 hover:bg-orange-100 text-orange-600 border border-orange-200 rounded-lg text-[10px] font-black uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-all"
@@ -1801,6 +2049,14 @@ export default function App() {
               <button 
                 onClick={() => {
                   unlockAudio();
+                  if (!currentUser?.isPremium) {
+                    if (!currentUser) {
+                      setIsAuthModalOpen(true);
+                    } else {
+                      setIsUpgradeModalOpen(true);
+                    }
+                    return;
+                  }
                   setIsVoiceModalOpen(true);
                 }}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
@@ -1981,6 +2237,14 @@ export default function App() {
               <div 
                 onClick={() => {
                   unlockAudio();
+                  if (!currentUser?.isPremium) {
+                    if (!currentUser) {
+                      setIsAuthModalOpen(true);
+                    } else {
+                      setIsUpgradeModalOpen(true);
+                    }
+                    return;
+                  }
                   setIsVoiceModalOpen(true);
                 }}
                 className="bg-orange-50/70 hover:bg-orange-100/70 border border-orange-100 rounded-2xl p-3.5 flex items-center justify-between text-xs text-orange-800 cursor-pointer transition-all shrink-0"
@@ -2392,6 +2656,46 @@ export default function App() {
           onRefresh={async () => {
             setRefreshTrigger(prev => prev + 1);
           }}
+        />
+      )}
+
+      {viewMode === 'profile' && (
+        <ProfileDashboard
+          currentUser={currentUser}
+          onLogout={handleLogout}
+          onUpgrade={() => setIsUpgradeModalOpen(true)}
+          onClose={() => setViewMode('home')}
+        />
+      )}
+
+      {/* AUTHENTICATION & LOGIN SYSTEM MODAL */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onSuccess={handleAuthSuccess}
+      />
+
+      {/* RAZORPAY SUBSCRIPTION UPGRADE MODAL */}
+      <UpgradeModal
+        isOpen={isUpgradeModalOpen}
+        onClose={() => setIsUpgradeModalOpen(false)}
+        userEmail={currentUser?.email}
+        onSuccess={(updatedUser) => {
+          setCurrentUser(updatedUser);
+          setIsUpgradeModalOpen(false);
+        }}
+        triggerAuth={() => {
+          setIsUpgradeModalOpen(false);
+          setIsAuthModalOpen(true);
+        }}
+      />
+      
+      {viewMode !== 'cooking' && viewMode !== 'admin' && (
+        <BottomNavigation
+          viewMode={viewMode}
+          currentUser={currentUser}
+          isUpgradeModalOpen={isUpgradeModalOpen}
+          onTabClick={handleBottomTabClick}
         />
       )}
 

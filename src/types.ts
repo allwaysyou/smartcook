@@ -48,6 +48,7 @@ export interface Recipe {
   is_diabetic_friendly?: boolean;
   is_keto?: boolean;
   is_high_protein?: boolean;
+  isPremium?: boolean;
 }
 
 export type Category = 'Breakfast' | 'Lunch' | 'Dinner' | 'Snacks' | 'Desserts' | 'Fast Food' | 'Beverages';
@@ -59,3 +60,15 @@ export interface TimerState {
   isFinished: boolean;
   totalDuration: number;
 }
+
+export interface User {
+  _id: string;
+  name: string;
+  email: string;
+  photoURL?: string;
+  isPremium: boolean;
+  purchaseDate?: string; // ISO string
+  premiumUntil?: string; // ISO string
+  createdAt: string;
+}
+

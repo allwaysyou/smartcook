@@ -8,6 +8,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { INITIAL_RECIPES } from './src/data/initialRecipes.ts';
 import fs from 'fs';
+import crypto from 'crypto';
+import Razorpay from 'razorpay';
 
 // Safe path resolution for both ES Modules (development) and CommonJS (compiled production) using process.cwd()
 const currentDirname = process.cwd();
@@ -32,6 +34,31 @@ try {
 } catch (err) {
   console.error('Failed to load or initialize recipe database file:', err);
 }
+
+// Users Database initialization
+const USERS_DB_PATH = path.join(currentDirname, 'src', 'data', 'users.json');
+let USERS_STORE: any[] = [];
+
+try {
+  const dir = path.dirname(USERS_DB_PATH);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  if (fs.existsSync(USERS_DB_PATH)) {
+    const fileContent = fs.readFileSync(USERS_DB_PATH, 'utf-8');
+    USERS_STORE = JSON.parse(fileContent);
+    console.log(`Loaded ${USERS_STORE.length} users from local JSON database.`);
+  } else {
+    fs.writeFileSync(USERS_DB_PATH, JSON.stringify([], null, 2), 'utf-8');
+    console.log(`Initialized empty user database file.`);
+  }
+} catch (err) {
+  console.error('Failed to load or initialize user database file:', err);
+}
+
+// Active user session store in memory
+const ACTIVE_SESSIONS: Record<string, { _id: string; email: string; name: string }> = {};
+
 
 const ENRICHED_RECIPES_META: Record<string, {
   macros: { calories: number; protein: number; carbs: number; fats: number };
@@ -218,9 +245,13 @@ const enrichRecipe = (recipe: any) => {
     substitutes: getIngredientSubstitutes(ing.name)
   }));
 
+  const indexInStore = RECIPES_STORE.findIndex(r => r._id === recipe._id);
+  const isPremium = indexInStore >= 3;
+
   return {
     ...recipe,
     ...meta,
+    isPremium,
     ingredients: ingredientsWithSubstitutes,
     steps: stepsWithVideos
   };
@@ -329,6 +360,357 @@ async function startServer() {
     } catch (error) {
       console.error('Error fetching recipe:', error);
       res.status(500).json({ error: 'Failed to fetch recipe' });
+    }
+  });
+
+  // ==========================================
+  // AUTHENTICATION & LOGIN SYSTEM API ROUTES
+  // ==========================================
+
+  // 1. Register User
+  app.post('/api/auth/register', (req, res) => {
+    try {
+      const { name, email, password } = req.body;
+
+      if (!name || !email || !password) {
+        return res.status(400).json({ success: false, message: 'All fields are required.' });
+      }
+
+      const emailLower = email.toLowerCase().trim();
+      const userExists = USERS_STORE.some(u => u.email.toLowerCase() === emailLower);
+      if (userExists) {
+        return res.status(400).json({ success: false, message: 'Email already registered.' });
+      }
+
+      const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
+      const _id = 'user_' + crypto.randomBytes(8).toString('hex');
+
+      const newUser = {
+        _id,
+        name: name.trim(),
+        email: emailLower,
+        password: hashedPassword,
+        isPremium: false,
+        createdAt: new Date().toISOString()
+      };
+
+      USERS_STORE.push(newUser);
+      fs.writeFileSync(USERS_DB_PATH, JSON.stringify(USERS_STORE, null, 2), 'utf-8');
+
+      // Generate a session token
+      const token = 'token_' + crypto.randomBytes(16).toString('hex');
+      ACTIVE_SESSIONS[token] = { _id, email: emailLower, name: newUser.name };
+
+      res.status(201).json({
+        success: true,
+        message: 'Registration successful!',
+        token,
+        user: {
+          _id,
+          name: newUser.name,
+          email: newUser.email,
+          isPremium: newUser.isPremium
+        }
+      });
+    } catch (err: any) {
+      res.status(500).json({ success: false, message: 'Server registration error: ' + err.message });
+    }
+  });
+
+  // 2. Login User
+  app.post('/api/auth/login', (req, res) => {
+    try {
+      const { email, password } = req.body;
+
+      if (!email || !password) {
+        return res.status(400).json({ success: false, message: 'Email and password are required.' });
+      }
+
+      const emailLower = email.toLowerCase().trim();
+      const user = USERS_STORE.find(u => u.email.toLowerCase() === emailLower);
+      if (!user) {
+        return res.status(400).json({ success: false, message: 'Invalid email or password.' });
+      }
+
+      const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
+      if (user.password !== hashedPassword) {
+        return res.status(400).json({ success: false, message: 'Invalid email or password.' });
+      }
+
+      // Check premium expiry
+      if (user.isPremium && user.premiumUntil) {
+        const expiry = new Date(user.premiumUntil);
+        if (expiry < new Date()) {
+          user.isPremium = false;
+          fs.writeFileSync(USERS_DB_PATH, JSON.stringify(USERS_STORE, null, 2), 'utf-8');
+        }
+      }
+
+      const token = 'token_' + crypto.randomBytes(16).toString('hex');
+      ACTIVE_SESSIONS[token] = { _id: user._id, email: emailLower, name: user.name };
+
+      res.json({
+        success: true,
+        message: 'Login successful!',
+        token,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          isPremium: user.isPremium,
+          premiumUntil: user.premiumUntil
+        }
+      });
+    } catch (err: any) {
+      res.status(500).json({ success: false, message: 'Server login error: ' + err.message });
+    }
+  });
+
+  // 3. Google Federated Sign-In (Saves / registers user on fly)
+  app.post('/api/auth/google', (req, res) => {
+    try {
+      const { name, email, photoURL, uid } = req.body;
+
+      if (!email || !name) {
+        return res.status(400).json({ success: false, message: 'Google profile credentials missing.' });
+      }
+
+      const emailLower = email.toLowerCase().trim();
+      let user = USERS_STORE.find(u => u.email.toLowerCase() === emailLower);
+
+      if (!user) {
+        const _id = uid || 'user_' + crypto.randomBytes(8).toString('hex');
+        user = {
+          _id,
+          name: name.trim(),
+          email: emailLower,
+          photoURL: photoURL || '',
+          isPremium: false,
+          createdAt: new Date().toISOString()
+        };
+        USERS_STORE.push(user);
+        fs.writeFileSync(USERS_DB_PATH, JSON.stringify(USERS_STORE, null, 2), 'utf-8');
+      } else {
+        // Update user properties if changed
+        let modified = false;
+        if (photoURL && user.photoURL !== photoURL) {
+          user.photoURL = photoURL;
+          modified = true;
+        }
+        if (uid && user._id !== uid && user._id.startsWith('user_')) {
+          user._id = uid;
+          modified = true;
+        }
+        if (modified) {
+          fs.writeFileSync(USERS_DB_PATH, JSON.stringify(USERS_STORE, null, 2), 'utf-8');
+        }
+      }
+
+      // Check premium expiry
+      if (user.isPremium && user.premiumUntil) {
+        const expiry = new Date(user.premiumUntil);
+        if (expiry < new Date()) {
+          user.isPremium = false;
+          fs.writeFileSync(USERS_DB_PATH, JSON.stringify(USERS_STORE, null, 2), 'utf-8');
+        }
+      }
+
+      const token = 'token_' + crypto.randomBytes(16).toString('hex');
+      ACTIVE_SESSIONS[token] = { _id: user._id, email: emailLower, name: user.name };
+
+      res.json({
+        success: true,
+        message: 'Google login successful!',
+        token,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          photoURL: user.photoURL,
+          isPremium: user.isPremium,
+          purchaseDate: user.purchaseDate,
+          premiumUntil: user.premiumUntil
+        }
+      });
+    } catch (err: any) {
+      res.status(500).json({ success: false, message: 'Google login error: ' + err.message });
+    }
+  });
+
+  // 4. Get current user profile
+  app.get('/api/auth/me', (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ success: false, message: 'Not authenticated' });
+      }
+
+      const token = authHeader.split(' ')[1];
+      const session = ACTIVE_SESSIONS[token];
+
+      if (!session) {
+        return res.status(401).json({ success: false, message: 'Session expired or invalid' });
+      }
+
+      const user = USERS_STORE.find(u => u._id === session._id);
+      if (!user) {
+        return res.status(401).json({ success: false, message: 'User not found' });
+      }
+
+      // Check premium expiry
+      if (user.isPremium && user.premiumUntil) {
+        const expiry = new Date(user.premiumUntil);
+        if (expiry < new Date()) {
+          user.isPremium = false;
+          fs.writeFileSync(USERS_DB_PATH, JSON.stringify(USERS_STORE, null, 2), 'utf-8');
+        }
+      }
+
+      res.json({
+        success: true,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          photoURL: user.photoURL,
+          isPremium: user.isPremium,
+          purchaseDate: user.purchaseDate,
+          premiumUntil: user.premiumUntil
+        }
+      });
+    } catch (err: any) {
+      res.status(500).json({ success: false, message: 'Profile retrieval error: ' + err.message });
+    }
+  });
+
+  // ==========================================
+  // RAZORPAY SUBSCRIPTION SYSTEM API ROUTES
+  // ==========================================
+
+  // 1. Create Razorpay Subscription Order
+  app.post('/api/subscribe/create-order', (req, res) => {
+    try {
+      const { amount, currency = 'INR' } = req.body;
+      const keyId = process.env.RAZORPAY_KEY_ID;
+      const keySecret = process.env.RAZORPAY_KEY_SECRET;
+
+      // Handle demo mode fallback if Razorpay keys are not set yet
+      if (!keyId || !keySecret) {
+        const mockOrderId = 'order_mock_' + crypto.randomBytes(8).toString('hex');
+        return res.json({
+          success: true,
+          isDemo: true,
+          orderId: mockOrderId,
+          amount: amount || 900,
+          currency,
+          key: 'rzp_test_mockkey'
+        });
+      }
+
+      const razorpay = new Razorpay({
+        key_id: keyId,
+        key_secret: keySecret
+      });
+
+      const options = {
+        amount: amount || 900, // Amount in paise (₹9 = 900 paise)
+        currency,
+        receipt: 'receipt_pro_' + Date.now()
+      };
+
+      razorpay.orders.create(options, (err, order) => {
+        if (err) {
+          console.error('Razorpay order creation error:', err);
+          return res.status(500).json({ success: false, message: 'Razorpay Order Creation Failed: ' + (err as any).message });
+        }
+        res.json({
+          success: true,
+          isDemo: false,
+          orderId: order.id,
+          amount: order.amount,
+          currency: order.currency,
+          key: keyId
+        });
+      });
+    } catch (err: any) {
+      res.status(500).json({ success: false, message: 'Server subscription order creation exception: ' + err.message });
+    }
+  });
+
+  // 2. Verify Razorpay Payment Signature and activate Pro Status
+  app.post('/api/subscribe/verify-payment', (req, res) => {
+    try {
+      const { orderId, paymentId, signature, email, isDemo } = req.body;
+
+      if (!email) {
+        return res.status(400).json({ success: false, message: 'User email is required to activate subscription.' });
+      }
+
+      const user = USERS_STORE.find(u => u.email.toLowerCase() === email.toLowerCase());
+      if (!user) {
+        return res.status(404).json({ success: false, message: 'Registered user not found matching this email.' });
+      }
+
+      if (isDemo) {
+        // Safe mock verification
+        const now = new Date();
+        user.isPremium = true;
+        user.purchaseDate = now.toISOString();
+        user.premiumUntil = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString(); // 30-day Pro status
+        fs.writeFileSync(USERS_DB_PATH, JSON.stringify(USERS_STORE, null, 2), 'utf-8');
+
+        return res.json({
+          success: true,
+          message: 'SmartCook Pro Activated Successfully (Demo Mode Verified)!',
+          user: {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            photoURL: user.photoURL,
+            isPremium: user.isPremium,
+            purchaseDate: user.purchaseDate,
+            premiumUntil: user.premiumUntil
+          }
+        });
+      }
+
+      const keySecret = process.env.RAZORPAY_KEY_SECRET;
+      if (!keySecret) {
+        return res.status(500).json({ success: false, message: 'Razorpay secret key not configured on server.' });
+      }
+
+      // Compute HMAC SHA256 signature verification
+      const body = orderId + '|' + paymentId;
+      const expectedSignature = crypto
+        .createHmac('sha256', keySecret)
+        .update(body.toString())
+        .digest('hex');
+
+      if (expectedSignature === signature) {
+        const now = new Date();
+        user.isPremium = true;
+        user.purchaseDate = now.toISOString();
+        user.premiumUntil = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString(); // 30 days of Pro status
+        fs.writeFileSync(USERS_DB_PATH, JSON.stringify(USERS_STORE, null, 2), 'utf-8');
+
+        res.json({
+          success: true,
+          message: 'SmartCook Pro Activated Successfully (Signature Verified)!',
+          user: {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            photoURL: user.photoURL,
+            isPremium: user.isPremium,
+            purchaseDate: user.purchaseDate,
+            premiumUntil: user.premiumUntil
+          }
+        });
+      } else {
+        res.status(400).json({ success: false, message: 'Payment verification failed: Invalid Signature.' });
+      }
+    } catch (err: any) {
+      res.status(500).json({ success: false, message: 'Server signature verification error: ' + err.message });
     }
   });
 
