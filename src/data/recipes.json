@@ -1,0 +1,1086 @@
+[
+  {
+    "_id": "rec_1",
+    "title": "Special Tandoori Chicken Tikka",
+    "slug": "special-tandoori-chicken-tikka",
+    "category": "Dinner",
+    "difficulty": "Medium",
+    "servings_base": 2,
+    "total_time_minutes": 45,
+    "cover_image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&q=80&w=800",
+    "description": "Authentic, smoky, and juice-filled chicken clay oven style tikka, perfectly marinated with rich tandoori spices and curd.",
+    "rating": 4.9,
+    "reviews_count": 312,
+    "ingredients": [
+      {
+        "name": "Boneless Chicken",
+        "quantity": 500,
+        "unit": "grams"
+      },
+      {
+        "name": "Thick Yogurt (Hung Curd)",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "Kashmiri Red Chili Powder",
+        "quantity": 1.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "Ginger Garlic Paste",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Garam Masala Powder",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Lemon Juice",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Mustard Oil",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Salt",
+        "quantity": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "Wash and dry the boneless chicken pieces. In a mixing bowl, combine hung curd, ginger-garlic paste, lemon juice, Kashmiri chili, garam masala, mustard oil, and salt. Marinate the chicken in this mixture and refrigerate.\n\nचिकन को अच्छे से धोकर सुखा लें, फिर उसमें दही, नींबू, अदरक-लहसुन पेस्ट और सारे मसाले मिलाकर 30 मिनट के लिए मैरीनेट होने के लिए फ्रिज में रख दें।",
+        "requires_timer": true,
+        "duration_seconds": 1800
+      },
+      {
+        "step_number": 2,
+        "instruction": "Thread the marinated chicken pieces onto skewers, leaving a tiny gap between pieces to ensure even cooking.\n\nसीख (skewers) पर मैरीनेट किए हुए चिकन के टुकड़े लगाएं और प्री-हीटेड ओवन या ग्रिल पैन पर रखें।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      },
+      {
+        "step_number": 3,
+        "instruction": "Grill the skewers on a preheated griddle or oven, turning occasionally and basting with butter/oil, until cooked through and slightly charred.\n\nचिकन को दोनों तरफ से पलटते हुए और मक्खन लगाते हुए अच्छी तरह से सेकें जब तक कि उसपर हल्के काले स्पॉट्स न आ जाएं।",
+        "requires_timer": true,
+        "duration_seconds": 600
+      }
+    ]
+  },
+  {
+    "_id": "rec_2",
+    "title": "Masala Chai & Fluffy Poha",
+    "slug": "masala-chai-fluffy-poha",
+    "category": "Breakfast",
+    "difficulty": "Easy",
+    "servings_base": 2,
+    "total_time_minutes": 20,
+    "cover_image": "https://images.unsplash.com/photo-1601050690597-df056fb4ce78?auto=format&fit=crop&q=80&w=800",
+    "description": "The quintessential Indian breakfast: light, flattened rice sautéed with turmeric, peanuts, and curry leaves, served alongside freshly brewed spiced cardamom-ginger tea.",
+    "rating": 4.8,
+    "reviews_count": 215,
+    "ingredients": [
+      {
+        "name": "Flattened Rice (Poha)",
+        "quantity": 2,
+        "unit": "cups"
+      },
+      {
+        "name": "Onion (Finely Chopped)",
+        "quantity": 1,
+        "unit": "medium"
+      },
+      {
+        "name": "Peanuts",
+        "quantity": 0.25,
+        "unit": "cup"
+      },
+      {
+        "name": "Mustard Seeds & Curry Leaves",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Turmeric Powder",
+        "quantity": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "Green Chilies (Chopped)",
+        "quantity": 2,
+        "unit": "pieces"
+      },
+      {
+        "name": "Lemon Juice & Coriander",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Sugar & Salt",
+        "quantity": 0.5,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "Rinse poha in a colander under running water for 30 seconds. Do not over-soak. Toss gently with turmeric, salt, and half a teaspoon of sugar, then let it rest.\n\nपोहा को छलनी में रखकर पानी से 30 सेकंड के लिए धो लें। ज्यादा पानी में न भिगोएं। इसमें हल्दी, नमक और आधा चम्मच चीनी मिलाकर हल्के हाथों से टॉस करके अलग रख दें।",
+        "requires_timer": true,
+        "duration_seconds": 180
+      },
+      {
+        "step_number": 2,
+        "instruction": "Heat oil in a pan. Fry peanuts until golden and crispy. Remove peanuts and set aside.\n\nकढ़ाई में तेल गर्म करें। मूंगफली के दानों को सुनहरा और क्रिस्पी होने तक तलें। तलने के बाद उन्हें प्लेट में निकाल लें।",
+        "requires_timer": true,
+        "duration_seconds": 120
+      },
+      {
+        "step_number": 3,
+        "instruction": "In the same oil, add mustard seeds and curry leaves. Once they crackle, add green chilies and onions. Sauté until onions turn translucent.\n\nउसी तेल में राई और कड़ी पत्ता डालें। जब ये चटकने लगें, तो कटी हुई हरी मिर्च और प्याज डालें। प्याज को पारदर्शी होने तक भूनें।",
+        "requires_timer": true,
+        "duration_seconds": 180
+      },
+      {
+        "step_number": 4,
+        "instruction": "Add the rinsed poha and fried peanuts. Mix gently so poha doesn't break. Cover and steam on low heat.\n\nअब धोया हुआ पोहा और तली हुई मूंगफली डालें। धीरे से मिलाएं ताकि पोहा टूटे नहीं। ढककर धीमी आंच पर भाप में पकने दें।",
+        "requires_timer": true,
+        "duration_seconds": 300
+      },
+      {
+        "step_number": 5,
+        "instruction": "Turn off the heat. Drizzle lemon juice and garnish with fresh chopped coriander and sev. Serve hot!\n\nगैस बंद कर दें। ऊपर से नींबू का रस और ताज़ा कटा हुआ हरा धनिया डालकर सर्व करें!",
+        "requires_timer": false,
+        "duration_seconds": 0
+      }
+    ]
+  },
+  {
+    "_id": "rec_3",
+    "title": "Paneer Butter Masala",
+    "slug": "paneer-butter-masala",
+    "category": "Lunch",
+    "difficulty": "Medium",
+    "servings_base": 4,
+    "total_time_minutes": 35,
+    "cover_image": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&q=80&w=800",
+    "description": "Rich, creamy, and mildly sweet restaurant-style gravy featuring soft paneer cubes simmered in a luscious butter-tomato-cashew sauce.",
+    "rating": 4.9,
+    "reviews_count": 520,
+    "ingredients": [
+      {
+        "name": "Paneer Cubes",
+        "quantity": 300,
+        "unit": "grams"
+      },
+      {
+        "name": "Butter",
+        "quantity": 3,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Tomatoes (Chopped)",
+        "quantity": 4,
+        "unit": "large"
+      },
+      {
+        "name": "Cashew Nuts (Kaju)",
+        "quantity": 12,
+        "unit": "pieces"
+      },
+      {
+        "name": "Heavy Cream",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Kasuri Methi (Dried Fenugreek)",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Kashmiri Chili Powder",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Garlic & Ginger (Finely chopped)",
+        "quantity": 1,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "Boil tomatoes, chopped ginger, garlic, and cashew nuts with half a cup of water until the tomatoes are soft and mushy.\n\nटमाटर, अदरक, लहसुन और काजू को आधा कप पानी के साथ उबालें जब तक टमाटर पूरी तरह से गल न जाएं।",
+        "requires_timer": true,
+        "duration_seconds": 600
+      },
+      {
+        "step_number": 2,
+        "instruction": "Allow the tomato-cashew mixture to cool completely, then blend in a high-speed mixer into a super smooth puree.\n\nटमाटर-काजू के मिश्रण को पूरी तरह से ठंडा होने दें, फिर मिक्सर में पीसकर बिल्कुल स्मूथ प्यूरी बना लें।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      },
+      {
+        "step_number": 3,
+        "instruction": "Heat 2 tablespoons of butter in a pan. Add Kashmiri chili powder and immediately pour the tomato puree. Sauté on medium-low until oil starts separating from the sides.\n\nकढ़ाई में 2 चम्मच मक्खन गर्म करें। कश्मीरी लाल मिर्च डालें और तुरंत टमाटर प्यूरी डाल दें। मध्यम आंच पर तब तक भूनें जब तक तेल किनारों से अलग न होने लगे।",
+        "requires_timer": true,
+        "duration_seconds": 480
+      },
+      {
+        "step_number": 4,
+        "instruction": "Add paneer cubes, water to adjust gravy consistency, sugar, and salt. Simmer gently on low heat.\n\nपनीर के टुकड़े, ग्रेवी के अनुसार पानी, थोड़ी चीनी और नमक डालें। धीमी आंच पर ढककर धीरे-धीरे पकने दें।",
+        "requires_timer": true,
+        "duration_seconds": 300
+      },
+      {
+        "step_number": 5,
+        "instruction": "Finish with heavy cream, remaining butter, and crushed Kasuri Methi. Stir gently and let it rest covered before serving.\n\nऊपर से फ्रेश क्रीम, बचा हुआ मक्खन और कसूरी मेथी क्रश करके डालें। हल्का सा मिलाकर ढक दें और सर्व करने से पहले 2 मिनट रेस्ट दें।",
+        "requires_timer": true,
+        "duration_seconds": 120
+      }
+    ]
+  },
+  {
+    "_id": "rec_4",
+    "title": "Quick Garlic Hakka Noodles",
+    "slug": "quick-garlic-hakka-noodles",
+    "category": "Fast Food",
+    "difficulty": "Easy",
+    "servings_base": 2,
+    "total_time_minutes": 15,
+    "cover_image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&q=80&w=800",
+    "description": "Classic street-style stir-fried Hakka noodles packed with charred garlic, crunchy bell peppers, cabbage, carrots, and savory sauces.",
+    "rating": 4.7,
+    "reviews_count": 189,
+    "ingredients": [
+      {
+        "name": "Hakka Noodles",
+        "quantity": 150,
+        "unit": "grams"
+      },
+      {
+        "name": "Garlic (Finely Minced)",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Sliced Veggies (Cabbage, Carrot, Onion, Capsicum)",
+        "quantity": 1.5,
+        "unit": "cups"
+      },
+      {
+        "name": "Soy Sauce",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Vinegar",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Green Chili Sauce",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Sesame Oil",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Black Pepper Powder",
+        "quantity": 0.5,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "Boil 4-5 cups of water with a pinch of salt and oil. Add noodles and cook until al dente. Drain, rinse with cold water, toss with a few drops of oil and set aside.\n\nएक बर्तन में 4-5 कप पानी, थोड़ा नमक और तेल डालकर उबालें। नूडल्स डालें और 'अल डेंटे' (हल्का कच्चा रहने तक) पकाएं। पानी छानें, ठंडे पानी से धोएं, थोड़ा तेल लगाकर रख दें।",
+        "requires_timer": true,
+        "duration_seconds": 360
+      },
+      {
+        "step_number": 2,
+        "instruction": "Heat sesame oil in a smoking hot wok. Add minced garlic and sauté until fragrant but not brown.\n\nलोहे की कढ़ाई (wok) में तिल का तेल तेज़ गर्म करें। बारीक कटा हुआ लहसुन डालें और खुशबू आने तक भूनें (कलर चेंज न होने दें)।",
+        "requires_timer": true,
+        "duration_seconds": 45
+      },
+      {
+        "step_number": 3,
+        "instruction": "Toss in all sliced vegetables on extremely high heat. Sauté continuously to keep them crunchy.\n\nतेज़ आंच पर सभी लंबी कटी सब्जियां डालें। इन्हें लगातार चलाते हुए तेज़ आंच पर फ्राई करें ताकि क्रंच बना रहे।",
+        "requires_timer": true,
+        "duration_seconds": 120
+      },
+      {
+        "step_number": 4,
+        "instruction": "Add boiled noodles, soy sauce, vinegar, green chili sauce, salt, and black pepper. Toss vigorously on high flame until noodles are evenly coated.\n\nउबले हुए नूडल्स, सोया सॉस, सिरका, ग्रीन चिली सॉस, नमक और काली मिर्च पाउडर डालें। नूडल्स को तेज़ आंच पर अच्छे से टॉस करें।",
+        "requires_timer": true,
+        "duration_seconds": 90
+      }
+    ]
+  },
+  {
+    "_id": "rec_5",
+    "title": "Hot Chocolate Lava Cake",
+    "slug": "hot-chocolate-lava-cake",
+    "category": "Desserts",
+    "difficulty": "Medium",
+    "servings_base": 2,
+    "total_time_minutes": 25,
+    "cover_image": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=80&w=800",
+    "description": "Decadent dark chocolate cake cups featuring a rich, molten chocolate center that flows out beautifully upon your first spoon cut.",
+    "rating": 4.95,
+    "reviews_count": 420,
+    "ingredients": [
+      {
+        "name": "Dark Chocolate (70%)",
+        "quantity": 100,
+        "unit": "grams"
+      },
+      {
+        "name": "Unsalted Butter",
+        "quantity": 50,
+        "unit": "grams"
+      },
+      {
+        "name": "All Purpose Flour (Maida)",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Powdered Sugar",
+        "quantity": 3,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Egg (Room Temp)",
+        "quantity": 1,
+        "unit": "whole"
+      },
+      {
+        "name": "Egg Yolk",
+        "quantity": 1,
+        "unit": "extra"
+      },
+      {
+        "name": "Vanilla Extract",
+        "quantity": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "Cocoa Powder (for dusting)",
+        "quantity": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "Preheat your oven to 200°C (400°F). Butter two ramekins and dust them thoroughly with cocoa powder to prevent sticking.\n\nओवन को 200°C पर प्रीहीट करें। दो रैमेकिन्स (बेकिंग कटोरी) में मक्खन लगाएं और कोको पाउडर छिड़ककर चारों तरफ अच्छे से फैला दें।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      },
+      {
+        "step_number": 2,
+        "instruction": "Melt chopped chocolate and butter in a heat-safe bowl over a pot of simmering water (Double Boiler) or in 30-sec microwave bursts. Stir until velvety smooth.\n\nकटे हुए चॉकलेट और मक्खन को डबल बॉयलर या माइक्रोवेव में पिघलाएं। बिल्कुल चिकना और चमकीला होने तक मिलाएं।",
+        "requires_timer": true,
+        "duration_seconds": 180
+      },
+      {
+        "step_number": 3,
+        "instruction": "In another bowl, whisk the whole egg, extra egg yolk, sugar, and vanilla extract until pale, light, and slightly frothy.\n\nएक अन्य कटोरे में पूरा अंडा, एक्स्ट्रा अंडे की जर्दी, चीनी और वेनिला एक्सट्रैक्ट को तब तक फेंटें जब तक कि वह हल्का पीला और फ्लफी न हो जाए।",
+        "requires_timer": true,
+        "duration_seconds": 120
+      },
+      {
+        "step_number": 4,
+        "instruction": "Gently fold the melted chocolate mixture and flour into the egg mixture. Do not overmix. Pour batter into ramekins.\n\nपिघली हुई चॉकलेट और मैदे को अंडे के मिश्रण में धीरे-धीरे मिलाएं। ज्यादा न फेंटें। बैटर को रैमेकिन्स में बराबर डालें।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      },
+      {
+        "step_number": 5,
+        "instruction": "Bake at 200°C. The edges should be firm while the center remains soft and jiggly. Let cool for 1 minute, invert onto plates, dust with sugar, and serve hot.\n\n200°C पर बेक करें। किनारे सख्त होने चाहिए लेकिन बीच का हिस्सा सॉफ्ट होना चाहिए। 1 मिनट ठंडा होने दें, प्लेट पर पलटें और तुरंत सर्व करें।",
+        "requires_timer": true,
+        "duration_seconds": 720
+      }
+    ]
+  },
+  {
+    "_id": "rec_6",
+    "title": "Crispy Onion Samosa",
+    "slug": "crispy-onion-samosa",
+    "category": "Snacks",
+    "difficulty": "Hard",
+    "servings_base": 4,
+    "total_time_minutes": 50,
+    "cover_image": "https://images.unsplash.com/photo-1601050690597-df056fb4ce78?auto=format&fit=crop&q=80&w=800",
+    "description": "Irresistibly crispy, triangular pastry packets filled with a spiced savory mixture of sautéed onions, poha, and traditional Indian spices.",
+    "rating": 4.8,
+    "reviews_count": 156,
+    "ingredients": [
+      {
+        "name": "Samosa Sheets (Patti)",
+        "quantity": 12,
+        "unit": "sheets"
+      },
+      {
+        "name": "Onions (Thinly Sliced)",
+        "quantity": 3,
+        "unit": "large"
+      },
+      {
+        "name": "Poha (Thick)",
+        "quantity": 0.25,
+        "unit": "cup"
+      },
+      {
+        "name": "Green Chilies (Chopped)",
+        "quantity": 2,
+        "unit": "pieces"
+      },
+      {
+        "name": "Red Chili Powder & Turmeric",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Chat Masala Powder",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Maida Paste (Flour + Water)",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Oil (for deep frying)",
+        "quantity": 2,
+        "unit": "cups"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "Prepare the filling: Mix sliced onions, dry poha (to absorb moisture), chopped chilies, salt, chili powder, and chat masala. Let it sit for 5 minutes.\n\nस्टफिंग तैयार करें: पतले कटे प्याज, सूखा पोहा (नमी सोखने के लिए), कटी हरी मिर्च, नमक, लाल मिर्च और चाट मसाला मिलाएं। इसे 5 मिनट के लिए रख दें।",
+        "requires_timer": true,
+        "duration_seconds": 300
+      },
+      {
+        "step_number": 2,
+        "instruction": "Fold the samosa sheet into a cone shape. Fill it with a spoonful of the onion mixture, seal the edges securely using the flour-water paste.\n\nसमोसा पट्टी को तिकोन आकार (cone) में मोड़ें। प्याज का मिश्रण भरें और मैदे-पानी के पेस्ट से किनारों को अच्छी तरह बंद करें।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      },
+      {
+        "step_number": 3,
+        "instruction": "Heat oil in a heavy-bottomed kadhai. Fry the samosas on medium-low flame. This slow frying is the secret to getting a bubbly, super crunchy crust.\n\nकढ़ाई में तेल गर्म करें। समोसों को मध्यम-धीमी आंच पर तलें। क्रिस्पी और बबल-फ्री समोसे पाने के लिए धीमी आंच पर तलना ही सीक्रेट है।",
+        "requires_timer": true,
+        "duration_seconds": 480
+      }
+    ]
+  },
+  {
+    "_id": "rec_7",
+    "title": "Dhaba Style Dal Makhani",
+    "slug": "dhaba-style-dal-makhani",
+    "category": "Dinner",
+    "difficulty": "Hard",
+    "servings_base": 6,
+    "total_time_minutes": 120,
+    "cover_image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=800",
+    "description": "Rich, slow-cooked whole black lentils and kidney beans simmered overnight, finished with copious amounts of fresh butter, cream, and smoky charcoal infusion (Dhungar).",
+    "rating": 4.98,
+    "reviews_count": 642,
+    "ingredients": [
+      {
+        "name": "Whole Black Lentils (Urad)",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "Red Kidney Beans (Rajma)",
+        "quantity": 0.25,
+        "unit": "cup"
+      },
+      {
+        "name": "Butter (Salted/Unsalted)",
+        "quantity": 4,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Fresh Cream",
+        "quantity": 4,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Tomato Puree",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "Ginger Garlic Paste",
+        "quantity": 1.5,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Kashmiri Chili Powder",
+        "quantity": 1.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "Salt & Kasuri Methi",
+        "quantity": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "Soak the urad dal and kidney beans in water for at least 8-12 hours overnight. Drain and wash multiple times under running water to remove dirt.\n\nउड़द और राजमा को कम से कम 8-12 घंटे के लिए पानी में भिगोकर रखें। फिर पानी निकालकर बहते पानी में रगड़कर अच्छे से धो लें।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      },
+      {
+        "step_number": 2,
+        "instruction": "Pressure cook the soaked lentils with ginger-garlic paste, salt, and water. Cook on low heat after 1 whistle until lentils are extremely soft and mashable.\n\nकुकर में उड़द-राजमा, अदरक-लहसुन पेस्ट, नमक और पर्याप्त पानी डालकर उबालें। एक सीटी आने के बाद आंच धीमी करके अच्छी तरह गलने तक पकाएं।",
+        "requires_timer": true,
+        "duration_seconds": 2400
+      },
+      {
+        "step_number": 3,
+        "instruction": "Heat butter in a heavy pot. Sauté remaining ginger-garlic paste and chili powder. Add tomato puree and cook until butter floats on top.\n\nकढ़ाई में मक्खन गर्म करें। अदरक-लहसुन पेस्ट और लाल मिर्च भूनें। टमाटर प्यूरी डालकर तब तक पकाएं जब तक मक्खन ऊपर न तैरने लगे।",
+        "requires_timer": true,
+        "duration_seconds": 600
+      },
+      {
+        "step_number": 4,
+        "instruction": "Pour the cooked lentils into the tomato gravy. Mash some lentils with the back of a spoon to make it creamy. Simmer on low heat, stirring occasionally to prevent sticking.\n\nउबले हुए उड़द-राजमा को टमाटर ग्रेवी में डालें। कड़छी की मदद से दाल को थोड़ा मैश करें। धीमी आंच पर लगातार चलाते हुए धीरे-धीरे पकने दें।",
+        "requires_timer": true,
+        "duration_seconds": 1800
+      },
+      {
+        "step_number": 5,
+        "instruction": "Stir in cream, remaining butter, and crushed Kasuri Methi. Optionally smoke using a hot charcoal piece and ghee (Dhungar) for 5 minutes before serving.\n\nऊपर से फ्रेश क्रीम, ढेर सारा मक्खन और कसूरी मेथी डालें। ढाबा जैसी खुशबू के लिए गरम कोयला और घी रखकर 5 मिनट के लिए धुआं (Dhungar) दें।",
+        "requires_timer": true,
+        "duration_seconds": 300
+      }
+    ]
+  },
+  {
+    "_id": "rec_8",
+    "title": "Aloo Paratha with White Butter",
+    "slug": "aloo-paratha-white-butter",
+    "category": "Breakfast",
+    "difficulty": "Medium",
+    "servings_base": 3,
+    "total_time_minutes": 30,
+    "cover_image": "https://images.unsplash.com/photo-1626132647523-66f5bf380027?auto=format&fit=crop&q=80&w=800",
+    "description": "Thick, wheat flatbreads stuffed with spicy, herb-laced mashed potatoes, roasted on a cast-iron tawa with ghee and topped with fresh, homemade white butter.",
+    "rating": 4.9,
+    "reviews_count": 278,
+    "ingredients": [
+      {
+        "name": "Whole Wheat Flour (Atta)",
+        "quantity": 2,
+        "unit": "cups"
+      },
+      {
+        "name": "Potatoes (Boiled & Mashed)",
+        "quantity": 3,
+        "unit": "medium"
+      },
+      {
+        "name": "Green Chilies & Ginger (Paste)",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Amchur (Mango Powder)",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Coriander Leaves (Chopped)",
+        "quantity": 3,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Ghee / Oil (for roasting)",
+        "quantity": 4,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Garam Masala & Salt",
+        "quantity": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "Homemade White Butter (Makhan)",
+        "quantity": 3,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "Knead wheat flour with a pinch of salt and water into a smooth, soft dough. Cover with a damp cloth and let it rest.\n\nगेहूं के आटे में थोड़ा नमक और पानी मिलाकर एक सॉफ्ट और लचीला आटा गूंध लें। गीले कपड़े से ढककर आराम करने दें।",
+        "requires_timer": true,
+        "duration_seconds": 900
+      },
+      {
+        "step_number": 2,
+        "instruction": "Mix boiled potato mash with ginger-chili paste, coriander, salt, amchur, and garam masala. Divide into golf-ball sized rounds.\n\nमैश किए हुए आलू में अदरक-मिर्च पेस्ट, हरा धनिया, अमचूर, नमक और गरम मसाला मिलाएं। बराबर आकार के गोले बना लें।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      },
+      {
+        "step_number": 3,
+        "instruction": "Roll a dough ball slightly, place the potato stuffing in the center, pleat the edges to cover completely, seal and flatten. Roll gently into a round disk.\n\nआटे की लोई बेलें, बीच में आलू का स्टफिंग रखें, किनारों को समेटकर बंद करें और चपटा करें। हल्के हाथों से गोल परांठा बेल लें।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      },
+      {
+        "step_number": 4,
+        "instruction": "Roast on a hot griddle (tawa). Flip, smear ghee generously on both sides, press edges until crisp and golden brown. Serve with white butter.\n\nगर्म तवे पर परांठे को डालें। दोनों तरफ घी लगाते हुए और किनारों को दबाते हुए क्रिस्पी और सुनहरा होने तक सेकें। सफेद मक्खन के साथ परोसें।",
+        "requires_timer": true,
+        "duration_seconds": 300
+      }
+    ]
+  },
+  {
+    "_id": "rec_9",
+    "title": "Crispy French Fries",
+    "slug": "crispy-french-fries",
+    "category": "Fast Food",
+    "difficulty": "Easy",
+    "servings_base": 2,
+    "total_time_minutes": 20,
+    "cover_image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&q=80&w=800",
+    "description": "Perfect golden, double-fried restaurant-style potatoes, crispy on the outside, light and fluffy on the inside, salted to perfection.",
+    "rating": 4.6,
+    "reviews_count": 145,
+    "ingredients": [
+      {
+        "name": "Russet Potatoes",
+        "quantity": 3,
+        "unit": "large"
+      },
+      {
+        "name": "Ice Cold Water",
+        "quantity": 4,
+        "unit": "cups"
+      },
+      {
+        "name": "Oil (for deep frying)",
+        "quantity": 3,
+        "unit": "cups"
+      },
+      {
+        "name": "Salt",
+        "quantity": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "Peel and cut potatoes into uniform 1/4-inch sticks. Soak immediately in ice cold water to wash away excess starch.\n\nआलू छीलकर एक समान पतले टुकड़ों (sticks) में काट लें। तुरंत स्टार्च निकालने के लिए उन्हें बर्फ के ठंडे पानी में भिगो दें।",
+        "requires_timer": true,
+        "duration_seconds": 600
+      },
+      {
+        "step_number": 2,
+        "instruction": "Drain potato sticks and pat them thoroughly dry on a kitchen towel. Excess water will make fries soggy.\n\nआलू के टुकड़ों का पानी छानें और किचन टॉवल पर सुखा लें। ध्यान रहे कि इनमें बिल्कुल नमी न रहे।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      },
+      {
+        "step_number": 3,
+        "instruction": "First Fry: Par-fry in medium-hot oil (150°C/300°F) until pale and soft but not browned. Drain on paper towels and let cool completely.\n\nपहला फ्राई: मध्यम-गर्म तेल में आलू को 5-6 मिनट के लिए हल्का सा तलें (कलर चेंज न हो)। निकाल कर पूरी तरह ठंडा होने दें।",
+        "requires_timer": true,
+        "duration_seconds": 360
+      },
+      {
+        "step_number": 4,
+        "instruction": "Second Fry: Flash-fry in blazing hot oil (190°C/375°F) until extremely golden and crispy. Toss immediately with fine salt in a bowl.\n\nदूसरा फ्राई: तेज़ गर्म तेल में आलू को सुनहरा और कुरकुरा होने तक फ्राई करें। निकालते ही तुरंत नमक मिलाकर टॉस करें।",
+        "requires_timer": true,
+        "duration_seconds": 180
+      }
+    ]
+  },
+  {
+    "_id": "rec_10",
+    "title": "Creamy Rice Kheer",
+    "slug": "creamy-rice-kheer",
+    "category": "Desserts",
+    "difficulty": "Easy",
+    "servings_base": 4,
+    "total_time_minutes": 40,
+    "cover_image": "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&q=80&w=800",
+    "description": "Classic Indian rice pudding slow-cooked in full fat milk, scented with green cardamom, saffron threads, and decorated with slivered pistachios.",
+    "rating": 4.85,
+    "reviews_count": 322,
+    "ingredients": [
+      {
+        "name": "Full Fat Milk",
+        "quantity": 1,
+        "unit": "liter"
+      },
+      {
+        "name": "Basmati Rice (Broken)",
+        "quantity": 0.25,
+        "unit": "cup"
+      },
+      {
+        "name": "Sugar",
+        "quantity": 0.33,
+        "unit": "cup"
+      },
+      {
+        "name": "Cardamom Powder",
+        "quantity": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "Saffron (Kesar) Threads",
+        "quantity": 12,
+        "unit": "pieces"
+      },
+      {
+        "name": "Slivered Almonds & Pistachios",
+        "quantity": 2,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "Wash Basmati rice and soak in water for 20 minutes. Drain, crush slightly with fingers and set aside.\n\nबासमती चावल धोकर 20 मिनट के लिए पानी में भिगो दें। पानी छानकर चावलों को उंगलियों से हल्का सा क्रश कर लें।",
+        "requires_timer": true,
+        "duration_seconds": 1200
+      },
+      {
+        "step_number": 2,
+        "instruction": "In a heavy-bottomed pan, bring milk to a boil. Add the soaked rice and stir well to avoid lumps.\n\nभारी तले के बर्तन में दूध को उबालें। भीगे हुए चावल डालें और गांठों से बचने के लिए अच्छी तरह चलाएं।",
+        "requires_timer": true,
+        "duration_seconds": 300
+      },
+      {
+        "step_number": 3,
+        "instruction": "Simmer on low heat, stirring every 2 minutes, scraping the milk solids from sides of pan, until the rice is completely cooked and mashed easily.\n\nधीमी आंच पर पकने दें, हर 2 मिनट में कड़छी चलाएं और किनारों से मलाई खुरचकर दूध में मिलाएं जब तक कि चावल पूरी तरह गल न जाएं।",
+        "requires_timer": true,
+        "duration_seconds": 1200
+      },
+      {
+        "step_number": 4,
+        "instruction": "Add sugar, cardamom powder, saffron dissolved in warm milk, and chopped nuts. Cook for 5 more minutes until kheer thickens.\n\nचीनी, इलायची पाउडर, दूध में भीगा केसर और कटे हुए मेवे डालें। 5 मिनट और पकाएं जब तक खीर गाढ़ी और मलाईदार न हो जाए।",
+        "requires_timer": true,
+        "duration_seconds": 300
+      }
+    ]
+  },
+  {
+    "_id": "rec_11",
+    "title": "Crispy Veg Pakora",
+    "slug": "crispy-veg-pakora",
+    "category": "Snacks",
+    "difficulty": "Easy",
+    "servings_base": 4,
+    "total_time_minutes": 15,
+    "cover_image": "https://images.unsplash.com/photo-1601050690597-df056fb4ce78?auto=format&fit=crop&q=80&w=800",
+    "description": "Crunchy tea-time fritters made of mixed shredded vegetables (onions, potatoes, spinach) coated in a spiced gram flour (besan) batter.",
+    "rating": 4.75,
+    "reviews_count": 243,
+    "ingredients": [
+      {
+        "name": "Gram Flour (Besan)",
+        "quantity": 1.5,
+        "unit": "cups"
+      },
+      {
+        "name": "Shredded Mixed Veggies (Potato, Onion, Cabbage, Spinach)",
+        "quantity": 2,
+        "unit": "cups"
+      },
+      {
+        "name": "Rice Flour (for extra crunch)",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Ajwain (Carom Seeds)",
+        "quantity": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "Green Chilies (Chopped)",
+        "quantity": 2,
+        "unit": "pieces"
+      },
+      {
+        "name": "Turmeric & Chili Powder",
+        "quantity": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "Oil (for deep frying)",
+        "quantity": 2,
+        "unit": "cups"
+      },
+      {
+        "name": "Chaat Masala",
+        "quantity": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "In a large bowl, combine shredded vegetables, chopped chilies, besan, rice flour, ajwain, turmeric, chili powder, and salt. Toss dry to let the veggies release their natural water.\n\nएक बड़े बर्तन में कटी हुई सब्जियां, मिर्च, बेसन, चावल का आटा, अजवाइन, हल्दी, लाल मिर्च और नमक मिलाएं। सब्जियों को सूखा ही टॉस करें ताकि वे अपना पानी छोड़ दें।",
+        "requires_timer": true,
+        "duration_seconds": 300
+      },
+      {
+        "step_number": 2,
+        "instruction": "Sprinkle 1-2 tablespoons of water only if needed, mixing to get a thick, lumpy coating. Do not make a runny batter.\n\nजरूरत पड़ने पर ही 1-2 चम्मच पानी छिड़कें, गाढ़ा और थोड़ा बंधा हुआ मिश्रण तैयार करें। घोल को पतला बिल्कुल न करें।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      },
+      {
+        "step_number": 3,
+        "instruction": "Drop small portions of the mixture into medium-hot oil. Fry until golden brown and super crispy. Drain, sprinkle chaat masala and serve warm.\n\nमीडियम गर्म तेल में छोटे-छोटे पकोड़े डालें। सुनहरा और बिल्कुल कुरकुरा होने तक तलें। तेल से छानें, ऊपर से चाट मसाला छिड़क कर सर्व करें।",
+        "requires_timer": true,
+        "duration_seconds": 300
+      }
+    ]
+  },
+  {
+    "_id": "rec_12",
+    "title": "Classic Indian Butter Chicken",
+    "slug": "classic-indian-butter-chicken",
+    "category": "Dinner",
+    "difficulty": "Medium",
+    "servings_base": 4,
+    "total_time_minutes": 45,
+    "cover_image": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&q=80&w=800",
+    "description": "The pride of Punjabi cuisine: tender, tandoor-grilled chicken pieces bathed in a smooth, creamy, velvety tomato sauce rich in butter and cream.",
+    "rating": 4.97,
+    "reviews_count": 789,
+    "ingredients": [
+      {
+        "name": "Marinated Chicken",
+        "quantity": 600,
+        "unit": "grams"
+      },
+      {
+        "name": "Butter",
+        "quantity": 4,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Tomato Puree",
+        "quantity": 1.5,
+        "unit": "cups"
+      },
+      {
+        "name": "Heavy Cream",
+        "quantity": 3,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Ginger Garlic Paste",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Garam Masala",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Honey or Sugar",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Kasuri Methi",
+        "quantity": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "Sauté the marinated chicken pieces in a pan with 1 tablespoon butter until cooked through and slightly browned. Set aside.\n\nपैन में 1 चम्मच मक्खन डालकर मैरीनेट किए हुए चिकन को अच्छी तरह पकने और थोड़ा ब्राउन होने तक सेकें, फिर अलग रख दें।",
+        "requires_timer": true,
+        "duration_seconds": 600
+      },
+      {
+        "step_number": 2,
+        "instruction": "In the same pan, add remaining butter and ginger-garlic paste. Sauté, then add tomato puree, honey, salt, and chili powder. Cook until oil separates.\n\nउसी पैन में बचा मक्खन और अदरक-लहसुन पेस्ट भूनें। टमाटर प्यूरी, शहद, नमक और लाल मिर्च पाउडर डालकर तेल अलग होने तक पकाएं।",
+        "requires_timer": true,
+        "duration_seconds": 480
+      },
+      {
+        "step_number": 3,
+        "instruction": "Add the grilled chicken pieces to the gravy. Stir well, cover and simmer gently to absorb flavors.\n\nअब सेके हुए चिकन के टुकड़ों को ग्रेवी में डालें। अच्छे से मिलाएं, ढककर फ्लेवर सोखने के लिए धीमी आंच पर पकने दें।",
+        "requires_timer": true,
+        "duration_seconds": 300
+      },
+      {
+        "step_number": 4,
+        "instruction": "Stir in cream, garam masala, and crushed Kasuri Methi. Let it sit for 2 minutes and serve with butter naan.\n\nऊपर से फ्रेश क्रीम, गरम मसाला और क्रश की हुई कसूरी मेथी मिलाएं। 2 मिनट ढककर रेस्ट दें, फिर बटर नान के साथ सर्व करें।",
+        "requires_timer": true,
+        "duration_seconds": 120
+      }
+    ]
+  },
+  {
+    "_id": "bev_001",
+    "title": "Adrak Elaichi Wali Desi Chai",
+    "slug": "adrak-elaichi-wali-desi-chai",
+    "category": "Beverages",
+    "difficulty": "Easy",
+    "servings_base": 2,
+    "total_time_minutes": 10,
+    "cover_image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&q=80&w=800",
+    "description": "The traditional Indian tea brewed slowly with crushed aromatic green cardamoms, warm spicy ginger, sugar, milk, and high-quality tea leaves.",
+    "rating": 4.95,
+    "reviews_count": 512,
+    "ingredients": [
+      {
+        "name": "Water",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "Milk",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "name": "Tea Leaves",
+        "quantity": 2,
+        "unit": "tsp"
+      },
+      {
+        "name": "Sugar",
+        "quantity": 2,
+        "unit": "tsp"
+      },
+      {
+        "name": "Crushed Ginger",
+        "quantity": 1,
+        "unit": "inch"
+      },
+      {
+        "name": "Cardamom (Elaichi)",
+        "quantity": 2,
+        "unit": "pieces"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "In a saucepan, take 1 cup of water. Add crushed ginger and green cardamom, then bring it to a boil.\n\nएक सॉसपैन में 1 कप पानी लें। उसमें कुचला हुआ अदरक और इलायची डालकर उबाल आने तक गर्म करें।",
+        "requires_timer": true,
+        "duration_seconds": 180
+      },
+      {
+        "step_number": 2,
+        "instruction": "Add tea leaves and sugar. Let it simmer on low heat for 2 minutes to allow the spices' flavors to infuse deeply into the water.\n\nअब पानी में चायपत्ती और चीनी डालें। इसे धीमी आंच पर 2 मिनट के लिए उबलने दें ताकि अदरक-इलायची का स्वाद पूरी तरह पानी में आ जाए।",
+        "requires_timer": true,
+        "duration_seconds": 120
+      },
+      {
+        "step_number": 3,
+        "instruction": "Pour 1 cup of milk into the pan. Bring it to a rolling boil on high heat, then simmer on low heat for 3 minutes.\n\nअब इसमें 1 कप दूध मिलाएं। आंच को तेज करें और एक उबाल आने दें, फिर आंच धीमी करके 3 मिनट तक अच्छे से पकने दें।",
+        "requires_timer": true,
+        "duration_seconds": 180
+      },
+      {
+        "step_number": 4,
+        "instruction": "Turn off the gas. Strain the hot aromatic tea into cups and serve immediately with biscuits.\n\nगैस बंद करें, चाय को कप में छान लें और गरमागरम सर्व करें।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      }
+    ]
+  },
+  {
+    "_id": "bev_002",
+    "title": "Cafe-Style Frothy Cold Coffee",
+    "slug": "cafe-style-frothy-cold-coffee",
+    "category": "Beverages",
+    "difficulty": "Easy",
+    "servings_base": 1,
+    "total_time_minutes": 5,
+    "cover_image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&q=80&w=800",
+    "description": "Rich, velvety, and deliciously chilled cafe-style cold coffee topped with thick aerated coffee froth and custom chocolate swirls.",
+    "rating": 4.88,
+    "reviews_count": 240,
+    "ingredients": [
+      {
+        "name": "Chilled Milk",
+        "quantity": 1,
+        "unit": "glass"
+      },
+      {
+        "name": "Instant Coffee Powder",
+        "quantity": 1.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "Warm Water",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Sugar",
+        "quantity": 2,
+        "unit": "tsp"
+      },
+      {
+        "name": "Ice Cubes",
+        "quantity": 4,
+        "unit": "blocks"
+      },
+      {
+        "name": "Chocolate Syrup",
+        "quantity": 1,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      {
+        "step_number": 1,
+        "instruction": "In a small cup, dissolve instant coffee powder and sugar with 2 tablespoons of warm water until completely dissolved.\n\nएक छोटे कप में कॉफी पाउडर, चीनी और 2 चम्मच गुनगुना पानी डालकर अच्छी तरह मिलाएं जब तक चीनी घुल न जाए।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      },
+      {
+        "step_number": 2,
+        "instruction": "In a blender, add chilled milk, dissolved coffee mixture, and ice cubes. Blend on high speed for 1 minute until it is frothy.\n\nएक ब्लेंडर जार में ठंडा दूध, घुली हुई कॉफी और आइस क्यूब्स डालें। इसे हाई स्पीड पर 1 मिनट के लिए ब्लेंड करें जब तक ऊपर अच्छा झाग (froth) न बन जाए।",
+        "requires_timer": true,
+        "duration_seconds": 60
+      },
+      {
+        "step_number": 3,
+        "instruction": "Drizzle chocolate syrup on the inner walls of the serving glass, then slowly pour the blended coffee and top with the thick froth.\n\nग्लास के अंदरूनी हिस्सों पर चॉकलेट सिरप से डिजाइन बनाएं, फिर ब्लेंड की हुई कॉफी को धीरे से डालें और ऊपर से थोड़ा झाग डालकर ठंडा-ठंडा परोसें।",
+        "requires_timer": false,
+        "duration_seconds": 0
+      }
+    ]
+  }
+]
